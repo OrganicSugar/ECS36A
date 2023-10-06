@@ -1,0 +1,148 @@
+#include <stdio.h>
+#include <math.h>
+double* tenPercent (double income) {
+  static double totalTax[7][7];
+  double amountOwed;
+  double leftOver;
+  if (income <= 9875) { //done
+    amountOwed = income * 0.10;
+    totalTax[0][1] = amountOwed;
+    printf("You were taxed 10.00%% on the first $%.2f you made which is $%.2f.\n", income, totalTax[0][1]);
+    totalTax[0][0] = 0;
+  }
+  else {
+    printf("You were taxed 10.00%% on the first $9875.00 you made which is $987.50\n");
+    totalTax[0][0] = income - 9875.00;
+    amountOwed = 987.50;
+    totalTax[0][1] = amountOwed;
+  }
+  return totalTax;
+}
+  double* twelvePercent (double leftOver) { //done
+  double amountOwed;
+  leftOver = totalTax[0][0];
+  if (leftOver <= 30250) {
+    amountOwed = leftOver * 0.12;
+    totalTax[1][1] = amountOwed;
+    printf("You were taxed 12.00%% on the next $%.2f you made which is $%.2f.\n", leftOver, totalTax[1][1]);
+    totalTax[1][0]  = 0;
+  }
+  else {
+    printf("You were taxed 12.00%% on the next $30250.00 you made which is $3630.00\n");
+    totalTax[1][0] = leftOver - 30250.00;
+    amountOwed = 3630;
+    totalTax[1][1] = amountOwed;
+  }
+  return totalTax;
+}
+double* twentytwoPercent (double leftOver) { //done
+  double amountOwed;
+  leftOver = totalTax[1][0];
+  if (leftOver <= 45400) {
+    amountOwed = leftOver * 0.22;
+    totalTax[2][1] = amountOwed;
+    printf("You were taxed 22.00%% on the next $%.2f you made which is $%.2f.\n", leftOver, totalTax[2][1]);
+    totalTax[2][0] = 0;
+  }
+  else {
+    printf("You were taxed 22.00%% on the next $45400.00 you made which is $9988.00\n");
+    totalTax[2][0] = leftOver - 45400.00;
+    amountOwed = 9988;
+    totalTax[2][1] = amountOwed;
+  }
+  return totalTax;
+}
+double* twentyfourPercent (double leftOver) {
+  double amountOwed;
+  leftOver = totalTax[2][0];
+  if (leftOver <= 77775) {
+    amountOwed = leftOver * 0.24;
+    totalTax[3][1] = amountOwed;
+    printf("You were taxed 24.00%% on the next $%.2f you made which is $%.2f.\n", leftOver, totalTax[3][1]);
+    totalTax[3][0] = 0;
+  }
+  else {
+    printf("You were taxed 24.00%% on the next $77775.00 you made which is $18666.00\n");
+    totalTax[3][0] = leftOver - 77775.00;
+    amountOwed = 18666;
+    totalTax[3][1] = amountOwed;
+  }
+ return totalTax;
+}
+double* thirtytwoPercent (double leftOver) {
+  double amountOwed;
+  leftOver = totalTax[3][0];
+  if (leftOver <= 44050) {
+    amountOwed = leftOver * 0.32;
+    totalTax[4][1] = amountOwed;
+    printf("You were taxed 32.00%% on the next $%.2f you made which is $%.2f.\n", leftOver, totalTax[4][1]);
+    totalTax[4][0] = 0;
+  }
+  else {
+    printf("You were taxed 32.00%% on the next $44050.00 you made which is $14096.00\n");
+    totalTax[4][0] = leftOver - 44050.00;
+    amountOwed = 14096;
+    totalTax[4][1] = amountOwed;
+  }
+  return totalTax;
+}
+double* thirtyfivePercent (double leftOver) {
+  double amountOwed;
+  leftOver = totalTax[4][0];
+  if (leftOver <= 311050) {
+    amountOwed = leftOver * 0.35;
+    totalTax[5][1] = amountOwed;
+    printf("You were taxed 35.00%% on the next $%.2f you made which is $%.2f.\n", leftOver, totalTax[5][1]);
+    totalTax[5][0] = 0;
+  }
+  else {
+    printf("You were taxed 35.00%% on the next $311050.00 you made which is $108867.50\n");
+    totalTax[5][0] = leftOver - 311050;
+    amountOwed = 108867;
+    totalTax[5][1] = amountOwed;
+  }
+  return totalTax;
+}
+double* thirtysevenPercent (double leftOver) {
+  double amountOwed;
+  leftOver = totalTax[5][0];
+  amountOwed = leftOver * 0.37;
+  totalTax[6][1] = amountOwed;
+  printf("You were taxed 37.00%% on the next $%.2f you made which is $%.2f.\n", leftOver, totalTax[6][1]);
+  return 0;
+}
+int main () {
+
+  double income;
+  double leftOver;
+  leftOver = totalTax[6][0];
+  double totalTaxFinal;
+  int i;
+printf("Enter your income for the years: ");
+scanf("%lf", &income);
+leftOver = tenPercent(income);
+if (leftOver > 0) {
+  leftOver = twelvePercent(leftOver);
+  if (leftOver > 0) {
+    leftOver = twentytwoPercent(leftOver);
+    if (leftOver > 0) {
+      leftOver = twentyfourPercent(leftOver);
+      if (leftOver > 0) {
+        leftOver = thirtytwoPercent(leftOver);
+        if (leftOver > 0) {
+          leftOver = thirtyfivePercent(leftOver);
+          if (leftOver > 0) {
+            leftOver = thirtysevenPercent(leftOver);
+          }
+        }
+      }
+    }
+  }
+}
+for(i = 0; i < 7; ++i) {
+  totalTaxFinal = totalTaxFinal + totalTax[i][0];
+  printf("%lf, %lf\n", totalTaxFinal, totalTax[i][0]);
+}
+printf("In total you will pay $%.2f in taxes on the $%.2f you made this year.\n", totalTaxFinal, income);
+return 0;
+}
